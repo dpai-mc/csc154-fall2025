@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Defense & Security: CompTIA CySA+ Course Outline</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- jsPDF for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <!-- Google Fonts for typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Force light mode and disable dark mode */
+        * {
+            color-scheme: light only;
+        }
+        
+        html {
+            color-scheme: light;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            html {
+                color-scheme: light;
+            }
+        }
+
+        /* Custom styles using the school's color scheme */
+        :root {
+            --school-blue: #00275D;
+            --school-gold: #FDC636;
+            --school-blue-light: #1e3a8a;
+            --school-blue-dark: #001845;
+            --gray-50: #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --gray-400: #94a3b8;
+            --gray-500: #64748b;
+            --gray-600: #475569;
+            --gray-700: #334155;
+            --gray-800: #1e293b;
+            --gray-900: #0f172a;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: var(--gray-800);
+            line-height: 1.6;
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .school-blue-text { color: var(--school-blue); }
+        .school-gold-text { color: var(--school-gold); }
+        .school-blue-bg { background-color: var(--school-blue); }
+        .school-gold-bg { background-color: var(--school-gold); }
+        .school-blue-border { border-color: var(--school-blue); }
+
+        /* Modern gradient backgrounds */
+        .gradient-hero {
+            background: linear-gradient(135deg, var(--school-blue) 0%, var(--school-blue-light) 100%);
+        }
+
+        .gradient-card {
+            background: linear-gradient(135deg, rgba(0, 39, 93, 0.02) 0%, rgba(30, 58, 138, 0.05) 100%);
+        }
+
+        /* Modern card styling */
+        .modern-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+            border: 1px solid var(--gray-200);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .modern-card:hover {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            transform: translateY(-1px);
+        }
+
+        /* Enhanced accordion styling */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 0 2rem;
+        }
+
+        .accordion-button.active .accordion-icon {
+            transform: rotate(45deg);
+        }
+
+        .accordion-icon {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .accordion-button:hover {
+            background-color: var(--gray-50);
+        }
+
+        .accordion-button:focus-visible {
+            outline: 2px solid var(--school-blue);
+            outline-offset: 2px;
+        }
+
+        /* Modern button styling */
+        .modern-btn {
+            background: linear-gradient(135deg, var(--school-blue) 0%, var(--school-blue-light) 100%);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 6px -1px rgba(0, 39, 93, 0.2), 0 2px 4px -1px rgba(0, 39, 93, 0.1);
+        }
+
+        .modern-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 16px -4px rgba(0, 39, 93, 0.3), 0 6px 8px -2px rgba(0, 39, 93, 0.2);
+        }
+
+        .modern-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Navigation pills */
+        .nav-pill {
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
+        }
+
+        .nav-pill:hover {
+            background-color: var(--gray-100);
+            border-color: var(--school-blue);
+        }
+
+        /* Modern section headers */
+        .section-header {
+            position: relative;
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--school-blue) 0%, var(--school-gold) 100%);
+            border-radius: 2px;
+        }
+
+        /* Enhanced typography */
+        .text-display {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        .text-heading {
+            font-size: clamp(1.5rem, 3vw, 2.25rem);
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+        }
+
+        /* Badge styling */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 12px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-gold {
+            background-color: rgba(253, 198, 54, 0.1);
+            color: #b45309;
+            border: 1px solid rgba(253, 198, 54, 0.3);
+        }
+
+        .badge-blue {
+            background-color: rgba(0, 39, 93, 0.1);
+            color: var(--school-blue);
+            border: 1px solid rgba(0, 39, 93, 0.3);
+        }
+
+        .badge-green {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: #059669;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .badge-purple {
+            background-color: rgba(139, 92, 246, 0.1);
+            color: #7c3aed;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+        }
+
+        /* Enhanced scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--gray-100);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--school-blue) 0%, var(--school-blue-light) 100%);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--school-blue-dark);
+        }
+
+        /* Enhanced list styling */
+        .modern-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .modern-list li {
+            position: relative;
+            padding: 8px 0 8px 24px;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .modern-list li:last-child {
+            border-bottom: none;
+        }
+
+        .modern-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 16px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--school-blue) 0%, var(--school-gold) 100%);
+        }
+
+        /* Info grid styling */
+        .info-grid {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+            border: 1px solid var(--gray-200);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .info-card:hover {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            transform: translateY(-2px);
+        }
+
+        /* Week number styling */
+        .week-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--school-blue) 0%, var(--school-blue-light) 100%);
+            color: white;
+            font-weight: 700;
+            font-size: 14px;
+            margin-right: 16px;
+            flex-shrink: 0;
+        }
+
+        /* Assessment breakdown styling */
+        .assessment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .assessment-item {
+            background: var(--gray-50);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border-left: 4px solid var(--school-blue);
+        }
+
+        /* Print styles */
+        @media print {
+            body, .container {
+                margin: 0;
+                padding: 0;
+                box-shadow: none;
+            }
+            .no-print {
+                display: none;
+            }
+            .accordion-button {
+                page-break-inside: avoid;
+            }
+            .accordion-content {
+                max-height: none !important;
+                padding-bottom: 2rem !important;
+                display: block !important;
+                page-break-before: auto;
+            }
+            .accordion-icon {
+                display: none;
+            }
+            .modern-card {
+                box-shadow: none;
+                border: 1px solid var(--gray-300);
+            }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-pill {
+                padding: 8px 16px;
+                font-size: 12px;
+            }
+            
+            .week-number {
+                width: 32px;
+                height: 32px;
+                font-size: 12px;
+                margin-right: 12px;
+            }
+        }
+
+        /* Focus styles for accessibility */
+        .focus-visible {
+            outline: 2px solid var(--school-blue);
+            outline-offset: 2px;
+        }
+
+        /* Reduced motion for accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body class="text-gray-800 bg-white">
+
+    <!-- Main Page Container -->
+    <div id="syllabus-content" class="container mx-auto p-4 sm:p-6 md:p-8 max-w-7xl">
+
+        <!-- Page Header -->
+        <header class="mb-16">
+            <!-- Top bar with Download Button -->
+            <div class="flex justify-end mb-6 no-print">
+                <button 
+                    id="download-pdf" 
+                    class="modern-btn flex items-center gap-2"
+                    aria-label="Download syllabus as PDF"
+                >
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                    </svg>
+                    Download PDF
+                </button>
+            </div>
+
+            <!-- Hero Section -->
+            <div class="gradient-hero text-white p-8 sm:p-12 rounded-3xl shadow-xl mb-8 text-center relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20"></div>
+                <div class="relative z-10">
+                    <h1 class="text-display mb-4 text-white">Network Defense & Security</h1>
+                    <p class="text-heading mb-2 opacity-90 text-white">CompTIA CySA+ Aligned Curriculum with Splunk Integration</p>
+                    <div class="flex flex-wrap justify-center gap-4 mt-6">
+                        <span class="badge" style="background-color: rgba(255,255,255,0.9); color: var(--school-blue); border-color: rgba(255,255,255,0.3); font-weight: 700;">16-Week Course</span>
+                        <span class="badge" style="background-color: rgba(255,255,255,0.2); color: white; border-color: rgba(255,255,255,0.3);">3 Credit Hours</span>
+                        <span class="badge" style="background-color: rgba(255,255,255,0.2); color: white; border-color: rgba(255,255,255,0.3);">Hybrid Online</span>
+                        <span class="badge" style="background-color: rgba(255,255,255,0.2); color: white; border-color: rgba(255,255,255,0.3);">CySA+ Prep</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Navigation -->
+            <nav class="flex justify-center mb-12 no-print" role="navigation" aria-label="Page navigation">
+                <div class="bg-gray-50 rounded-full p-2 border border-gray-200">
+                    <div class="flex space-x-2">
+                        <a href="#course-information" class="nav-pill school-blue-text">Course Info</a>
+                        <a href="#assessment-strategy" class="nav-pill school-blue-text">Assessment</a>
+                        <a href="#course-schedule" class="nav-pill school-blue-text">Weekly Schedule</a>
+                        <a href="#resources" class="nav-pill school-blue-text">Resources</a>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Course Description -->
+            <div class="modern-card p-8 mb-12">
+                <h2 class="text-heading school-blue-text mb-6">Course Description</h2>
+                <p class="text-gray-700 text-lg leading-relaxed mb-6">
+                    This course will provide students the opportunity to learn how to configure and use threat detection tools, perform data analysis, and interpret the results to identify vulnerabilities, threats, and risks to an organization with the end goal of securing and protecting applications and systems within an organization. The course covers skills used by Information Security (IT) security analysts, vulnerability analysts, or threat intelligence analysts with a technical, "hands-on" focus on IT security analytics.
+                </p>
+                <p class="text-gray-700 text-lg leading-relaxed">
+                    Upon successful completion, students qualify to take CompTIA's Cybersecurity Analyst (CySA+) certification exam. This comprehensive curriculum integrates enterprise-grade Splunk SIEM technology throughout the course, providing students with both certification preparation and highly marketable enterprise security skills.
+                </p>
+            </div>
+
+            <!-- Student Learning Outcomes -->
+            <div class="modern-card p-8">
+                <h2 class="text-heading school-blue-text mb-6">Student Learning Outcomes</h2>
+                <ul class="modern-list space-y-4">
+                    <li class="text-gray-700">Apply environmental reconnaissance techniques using appropriate tools and processes.</li>
+                    <li class="text-gray-700">Implement or recommend the appropriate response and countermeasure for a network-based threat.</li>
+                    <li class="text-gray-700">Distinguish threat data or behavior to determine the impact of an incident.</li>
+                    <li class="text-gray-700">Summarize the incident recovery and post-incident response process.</li>
+                </ul>
+            </div>
+        </header>
+
+        <!-- Course Information Section -->
+        <section id="course-information" class="mb-16 pt-8 -mt-8">
+            <h2 class="text-heading school-blue-text section-header">Course Information</h2>
+            <div class="info-grid">
+                <!-- Time Structure -->
+                <div class="info-card">
+                    <h3 class="text-xl font-bold school-blue-text mb-4 flex items-center">
+                        <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        Weekly Time Structure
+                    </h3>
+                    <div class="space-y-3">
+                        <div><strong class="text-gray-800">Class Session:</strong> <span class="text-gray-600">80 minutes (synchronous instruction)</span></div>
+                        <div><strong class="text-gray-800">Independent Study:</strong> <span class="text-gray-600">4.5 hours (readings, videos, discussions)</span></div>
+                        <div><strong class="text-gray-800">Lab Activities:</strong> <span class="text-gray-600">3 hours (ProxMox-based exercises)</span></div>
+                        <div><strong class="text-gray-800">Total Weekly:</strong> <span class="badge badge-blue">8.5 hours per student</span></div>
+                    </div>
+                </div>
+
+                <!-- Lab Infrastructure -->
+                <div class="info-card">
+                    <h3 class="text-xl font-bold school-blue-text mb-4 flex items-center">
+                        <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
+                        </svg>
+                        Lab Infrastructure
+                    </h3>
+                    <div class="space-y-3">
+                        <div><strong class="text-gray-800">Platform:</strong> <span class="text-gray-600">ProxMox Virtual Environment</span></div>
+                        <div><strong class="text-gray-800">Primary SIEM:</strong> <span class="badge badge-gold">Splunk Enterprise</span></div>
+                        <div><strong class="text-gray-800">Tools:</strong> <span class="text-gray-600">Kali Linux, Nessus, OpenVAS, MISP</span></div>
+                        <div><strong class="text-gray-800">Target Systems:</strong> <span class="text-gray-600">Windows Server, Ubuntu, Metasploitable</span></div>
+                    </div>
+                </div>
+
+                <!-- Certification Prep -->
+                <div class="info-card">
+                    <h3 class="text-xl font-bold school-blue-text mb-4 flex items-center">
+                        <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                        </svg>
+                        Certification Preparation
+                    </h3>
+                    <div class="space-y-3">
+                        <div><strong class="text-gray-800">Primary:</strong> <span class="badge badge-green">CompTIA CySA+ CS0-003</span></div>
+                        <div><strong class="text-gray-800">Secondary:</strong> <span class="text-gray-600">Splunk Certification Pathway</span></div>
+                        <div><strong class="text-gray-800">Practice Exams:</strong> <span class="text-gray-600">Weekly CySA+ practice questions</span></div>
+                        <div><strong class="text-gray-800">Mock Environment:</strong> <span class="text-gray-600">Performance-based simulation exercises</span></div>
+                    </div>
+                </div>
+
+                <!-- Required Textbook -->
+                <div class="info-card">
+                    <h3 class="text-xl font-bold school-blue-text mb-4 flex items-center">
+                        <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                        Required Textbook
+                    </h3>
+                    <div class="space-y-3">
+                        <div><strong class="text-gray-800">Primary Text:</strong></div>
+                        <div class="text-gray-600 ml-4">CompTIA CySA+ Study Guide: Exam CS0-003 by Mike Chapple</div>
+                        <div><strong class="text-gray-800">Supplementary:</strong></div>
+                        <div class="text-gray-600 ml-4">Splunk Fundamentals 1 (free online course)</div>
+                        <div class="text-gray-600 ml-4">NIST Cybersecurity Framework documentation</div>
+                        <div class="text-gray-600 ml-4">MITRE ATT&CK framework</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Assessment Strategy Section -->
+        <section id="assessment-strategy" class="mb-16 pt-8 -mt-8">
+            <h2 class="text-heading school-blue-text section-header">Assessment Strategy</h2>
+            
+            <!-- Overall Assessment Breakdown -->
+            <div class="modern-card p-8 mb-8">
+                <h3 class="text-xl font-bold school-blue-text mb-6">Assessment Breakdown</h3>
+                <div class="assessment-grid">
+                    <div class="assessment-item">
+                        <h4 class="font-bold text-lg school-blue-text mb-2">Formative Assessments</h4>
+                        <div class="text-3xl font-bold text-gray-800 mb-2">40%</div>
+                        <div class="space-y-2">
+                            <div class="text-gray-600">Weekly quizzes and discussions: 16%</div>
+                            <div class="text-gray-600">Lab exercise reports (including Splunk): 24%</div>
+                        </div>
+                    </div>
+                    <div class="assessment-item">
+                        <h4 class="font-bold text-lg school-blue-text mb-2">Summative Assessments</h4>
+                        <div class="text-3xl font-bold text-gray-800 mb-2">60%</div>
+                        <div class="space-y-2">
+                            <div class="text-gray-600">Midterm examination: 20%</div>
+                            <div class="text-gray-600">Final examination: 20%</div>
+                            <div class="text-gray-600">Capstone project: 20%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Splunk-Specific Assessments -->
+            <div class="modern-card p-8">
+                <h3 class="text-xl font-bold school-blue-text mb-6 flex items-center">
+                    <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                    </svg>
+                    Splunk Proficiency Milestones
+                </h3>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                        <div>
+                            <div class="font-semibold text-gray-800">Week 4: Basic Splunk Search Competency</div>
+                            <div class="text-gray-600">Fundamental search commands and data exploration</div>
+                        </div>
+                        <span class="badge badge-blue">Milestone 1</span>
+                    </div>
+                    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                        <div>
+                            <div class="font-semibold text-gray-800">Week 6: Dashboard Creation & SPL Proficiency</div>
+                            <div class="text-gray-600">Advanced Search Processing Language and visualizations</div>
+                        </div>
+                        <span class="badge badge-green">Milestone 2</span>
+                    </div>
+                    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                        <div>
+                            <div class="font-semibold text-gray-800">Week 8: Midterm Practical - Splunk Investigation</div>
+                            <div class="text-gray-600">Real-world incident investigation using Splunk</div>
+                        </div>
+                        <span class="badge badge-purple">Milestone 3</span>
+                    </div>
+                    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                        <div>
+                            <div class="font-semibold text-gray-800">Week 10: Advanced Correlation Search Development</div>
+                            <div class="text-gray-600">Complex multi-source data correlation techniques</div>
+                        </div>
+                        <span class="badge badge-gold">Milestone 4</span>
+                    </div>
+                    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                        <div>
+                            <div class="font-semibold text-gray-800">Week 13: Executive Dashboard Presentation</div>
+                            <div class="text-gray-600">Business-ready security metrics and reporting</div>
+                        </div>
+                        <span class="badge badge-blue">Milestone 5</span>
+                    </div>
+                    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                        <div>
+                            <div class="font-semibold text-gray-800">Week 15: Comprehensive SOC Analyst Simulation</div>
+                            <div class="text-gray-600">End-to-end security operations workflow</div>
+                        </div>
+                        <span class="badge badge-green">Final Milestone</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Course Schedule Section -->
+        <main id="course-schedule" class="mb-16 pt-8 -mt-8">
+            <h2 class="text-heading school-blue-text section-header">16-Week Course Schedule</h2>
+            
+            <!-- Course Overview -->
+            <div class="modern-card p-8 mb-8">
+                <h3 class="text-xl font-bold school-blue-text mb-4">Course Structure Overview</h3>
+                <p class="text-gray-700 leading-relaxed mb-4">
+                    This comprehensive 16-week course is structured to build cybersecurity analyst skills progressively, mapping directly to the CompTIA CySA+ CS0-003 exam domains while providing extensive hands-on experience with enterprise-grade Splunk SIEM technology.
+                </p>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-lg border border-blue-200">
+                        <h4 class="font-semibold text-blue-800 mb-3">Weeks 1-8: Foundations & Core Skills</h4>
+                        <ul class="text-blue-700 space-y-1 text-sm">
+                            <li>• Security operations fundamentals</li>
+                            <li>• Malicious activity analysis</li>
+                            <li>• Vulnerability management</li>
+                            <li>• Basic to intermediate Splunk skills</li>
+                            <li>• Midterm examination</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-lg border border-purple-200">
+                        <h4 class="font-semibold text-purple-800 mb-3">Weeks 9-16: Advanced Applications</h4>
+                        <ul class="text-purple-700 space-y-1 text-sm">
+                            <li>• Incident response lifecycle</li>
+                            <li>• Advanced threat detection</li>
+                            <li>• Reporting & communication</li>
+                            <li>• Advanced Splunk correlation</li>
+                            <li>• Capstone project & final exam</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-6" id="weekly-schedule">
+                <!-- Weekly schedule will be populated by JavaScript -->
+            </div>
+        </main>
+
+        <!-- Resources Section -->
+        <section id="resources" class="mb-16 pt-8 -mt-8">
+            <h2 class="text-heading school-blue-text section-header">Resources & Tools</h2>
+            
+            <div class="info-grid">
+                <!-- Software Platforms -->
+                <div class="info-card">
+                    <h3 class="text-xl font-bold school-blue-text mb-4 flex items-center">
+                        <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                        Software Platforms (ProxMox Deployed)
+                    </h3>
+                    <ul class="modern-list space-y-2">
+                        <li class="text-gray-600">Splunk Enterprise (60-day trial, then free license)</li>
+                        <li class="text-gray-600">Splunk Universal Forwarders (multiple instances)</li>
+                        <li class="text-gray-600">Kali Linux (penetration testing tools)</li>
+                        <li class="text-gray-600">Windows Server 2019/2022 (Active Directory lab)</li>
+                        <li class="text-gray-600">Ubuntu/CentOS servers</li>
+                        <li class="text-gray-600">Metasploitable (vulnerable target systems)</li>
+                        <li class="text-gray-600">pfSense (firewall/router)</li>
+                    </ul>
+                </div>
+
+                <!-- Splunk Resources -->
+                <div class="info-card">
+                    <h3 class="text-xl font-bold school-blue-text mb-4 flex items-center">
+                        <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
+                        </svg>
+                        Splunk Learning Resources
+                    </h3>
+                    <ul class="modern-list space-y-2">
+                        <li class="text-gray-600">Splunk Fundamentals 1 (free online course)</li>
+                        <li class="text-gray-600">Splunk Search Tutorial (built-in tutorial data)</li>
+                        <li class="text-gray-600">Boss of the SOC (BOTS) datasets</li>
+                        <li class="text-gray-600">Splunk Security Essentials app</li>
+                        <li class="text-gray-600">SPL reference documentation</li>
+                    </ul>
+                </div>
+
+                <!-- Industry Resources -->
+                <div class="info-card">
+                    <h3 class="text-xl font-bold school-blue-text mb-4 flex items-center">
+                        <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-9m0-9v9"></path>
+                        </svg>
+                        Industry Frameworks
+                    </h3>
+                    <ul class="modern-list space-y-2">
+                        <li class="text-gray-600">NIST Cybersecurity Framework</li>
+                        <li class="text-gray-600">MITRE ATT&CK framework</li>
+                        <li class="text-gray-600">Current threat intelligence feeds</li>
+                        <li class="text-gray-600">Industry case studies and reports</li>
+                        <li class="text-gray-600">SANS incident response methodology</li>
+                    </ul>
+                </div>
+
+                <!-- Career Benefits -->
+                <div class="info-card">
+                    <h3 class="text-xl font-bold school-blue-text mb-4 flex items-center">
+                        <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                        Career Preparation Benefits
+                    </h3>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-800 mb-2">Industry-Relevant Skills</h4>
+                            <ul class="text-gray-600 text-sm space-y-1">
+                                <li>• Enterprise SIEM experience</li>
+                                <li>• Real-world SOC analyst procedures</li>
+                                <li>• Marketable certifications preparation</li>
+                                <li>• Portfolio development</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800 mb-2">Professional Development</h4>
+                            <ul class="text-gray-600 text-sm space-y-1">
+                                <li>• Splunk certification pathway</li>
+                                <li>• Enterprise readiness</li>
+                                <li>• Problem-solving skills</li>
+                                <li>• Communication & reporting skills</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Splunk Licensing Strategy -->
+            <div class="modern-card p-8 mt-8">
+                <h3 class="text-xl font-bold school-blue-text mb-4">Splunk Licensing Strategy</h3>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-blue-50 p-6 rounded-lg border border-blue-200">
+                        <h4 class="font-semibold text-blue-800 mb-3">Weeks 1-8: Enterprise Trial</h4>
+                        <ul class="text-blue-700 space-y-2">
+                            <li>• 60-day Enterprise trial (full features)</li>
+                            <li>• Complete functionality access</li>
+                            <li>• Advanced correlation searches</li>
+                            <li>• Enterprise Security features</li>
+                        </ul>
+                    </div>
+                    <div class="bg-green-50 p-6 rounded-lg border border-green-200">
+                        <h4 class="font-semibold text-green-800 mb-3">Weeks 9-16: Free License</h4>
+                        <ul class="text-green-700 space-y-2">
+                            <li>• Free license (500MB/day limit)</li>
+                            <li>• Focused, high-quality datasets</li>
+                            <li>• Advanced features via instructor demos</li>
+                            <li>• Continued hands-on practice</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="mt-16 pt-8 border-t border-gray-200 text-center text-gray-500">
+            <p class="text-sm">© 2025 Network Defense & Security - CompTIA CySA+ Aligned Curriculum with Splunk Integration</p>
+        </footer>
+    </div>
+
+    <script>
+        // --- Course Data ---
+        const courseData = [
+            { 
+                week: 1, 
+                title: "Foundation & Course Introduction", 
+                domain: "Security Operations (1.0)", 
+                slo: "Course foundation for all objectives",
+                classSession: "Course overview and CySA+ certification roadmap, Cybersecurity analyst role and responsibilities, Introduction to ProxMox lab environment, Security operations fundamentals, Enterprise SIEM overview and Splunk introduction",
+                independentStudy: "Read: Chapter 1 - Today's Cybersecurity Analyst, Complete: Pre-course assessment quiz, Watch: 'Day in the Life of a SOC Analyst' videos, Review: Splunk overview documentation, Discussion: Career goals and expectations",
+                labActivity: "ProxMox environment familiarization, VM deployment and basic navigation, Lab safety and academic integrity training, Initial tool installation (Kali Linux setup), Splunk Enterprise server deployment and initial configuration"
+            },
+            { 
+                week: 2, 
+                title: "System & Network Architecture", 
+                domain: "Security Operations (1.1)", 
+                slo: "Foundation for environmental reconnaissance",
+                classSession: "Network architecture security concepts, Operating system security fundamentals, Infrastructure design principles, Log ingestion and management systems with Splunk, Splunk Universal Forwarder concepts",
+                independentStudy: "Read: Chapter 2 - System and Network Architecture, Complete: Network topology analysis exercises, Begin: Splunk Fundamentals 1 online course (free), Research: Current network security frameworks, Quiz: Architecture concepts assessment",
+                labActivity: "Network topology creation in ProxMox, Multi-tier network segmentation setup, Basic network scanning with Nmap, Splunk Universal Forwarder deployment on Windows and Linux systems, Initial log data ingestion configuration"
+            },
+            { 
+                week: 3, 
+                title: "Malicious Activity Indicators & Analysis", 
+                domain: "Security Operations (1.2, 1.3)", 
+                slo: "Apply environmental reconnaissance techniques",
+                classSession: "Indicators of Compromise (IoCs), Behavioral analysis techniques, Network traffic analysis fundamentals, Malware identification methods, Basic Splunk search interface and navigation",
+                independentStudy: "Read: Chapter 3 - Analyzing Malicious Activity, Study: MITRE ATT&CK framework, Continue: Splunk Fundamentals 1 course, Case study: Recent breach analysis, Discussion: IoC sharing and threat feeds",
+                labActivity: "Wireshark traffic analysis lab, Malware sandbox analysis (Cuckoo/REMnux), Basic Splunk searches for security events, Simple field extraction and filtering, IoC extraction exercise"
+            },
+            { 
+                week: 4, 
+                title: "Threat Intelligence & Hunting", 
+                domain: "Security Operations (1.4)", 
+                slo: "Apply environmental reconnaissance techniques",
+                classSession: "Threat intelligence lifecycle, Threat hunting methodologies, Intelligence sharing protocols, Attribution and threat actor profiling, Using Splunk for threat hunting activities",
+                independentStudy: "Read: Chapter 4 - Threat Intelligence and Hunting, Research: Current threat landscape, Complete: Splunk Fundamentals 1 course, Complete: Threat intelligence platform evaluation, Assignment: Threat hunting hypothesis development",
+                labActivity: "OSINT gathering techniques, Threat intelligence platform usage (MISP), Splunk searches for threat hunting patterns, Creating basic Splunk alerts for IoCs, Intelligence report creation",
+                milestone: "Basic Splunk Search Competency"
+            },
+            { 
+                week: 5, 
+                title: "Vulnerability Scanning Fundamentals", 
+                domain: "Vulnerability Management (2.1)", 
+                slo: "Apply environmental reconnaissance techniques",
+                classSession: "Vulnerability scanning methodologies, Scanner types and capabilities, Scanning strategies and timing, Compliance vs. discovery scanning, Integrating vulnerability data with Splunk",
+                independentStudy: "Read: Chapter 5 - Vulnerability Scanning Concepts, Study: CVSS scoring methodology, Study: Splunk Search Processing Language (SPL) basics, Research: Vulnerability databases (NVD, CVE), Quiz: Scanning concepts assessment",
+                labActivity: "Nessus vulnerability scanner deployment, OpenVAS configuration and usage, Network discovery and enumeration, Vulnerability scan result ingestion into Splunk, Creating Splunk searches for vulnerability analysis"
+            },
+            { 
+                week: 6, 
+                title: "Vulnerability Assessment Analysis", 
+                domain: "Vulnerability Management (2.2)", 
+                slo: "Distinguish threat data to determine impact",
+                classSession: "Vulnerability report interpretation, False positive identification, Risk assessment methodologies, Remediation planning strategies, Advanced SPL for vulnerability data correlation",
+                independentStudy: "Read: Chapter 6 - Vulnerability Assessment Tools, Complete: Scan report analysis exercises, Study: Advanced Splunk search commands (stats, eval, where), Case study: Enterprise vulnerability management, Discussion: Risk tolerance and business impact",
+                labActivity: "Comprehensive vulnerability assessment project, Multi-scanner result correlation, Splunk dashboard creation for vulnerability metrics, Time-based vulnerability trend analysis in Splunk, Risk scoring and prioritization exercise",
+                milestone: "Dashboard Creation & SPL Proficiency"
+            },
+            { 
+                week: 7, 
+                title: "Vulnerability Prioritization & Risk Assessment", 
+                domain: "Vulnerability Management (2.3)", 
+                slo: "Distinguish threat data to determine impact",
+                classSession: "Risk-based vulnerability management, Business impact assessment, Asset criticality evaluation, Patch management strategies, Splunk lookup tables and data enrichment",
+                independentStudy: "Read: Chapter 7 - Vulnerability Prioritization, Complete: Risk matrix development exercise, Study: Splunk data models and pivot functionality, Research: Industry-specific compliance requirements, Assignment: Vulnerability management policy draft",
+                labActivity: "Asset inventory and classification, Risk-based prioritization exercise, Advanced Splunk correlation searches for risk assessment, Creating executive vulnerability dashboards, Vulnerability lifecycle management simulation"
+            },
+            { 
+                week: 8, 
+                title: "Midterm Examination & Review", 
+                domain: "Assessment Week", 
+                slo: "All SLOs - comprehensive assessment",
+                classSession: "Midterm exam (performance-based questions), Course progress review, Splunk skills assessment and troubleshooting, Q&A session for challenging concepts, Lab environment troubleshooting",
+                independentStudy: "Comprehensive review of Weeks 1-7, Practice exam completion, Splunk search optimization review, Peer study group participation, Self-assessment and gap identification",
+                labActivity: "Integrated lab exercise combining all tools, Comprehensive Splunk investigation exercise, Practical skills demonstration, Lab environment optimization, Backup and documentation procedures",
+                milestone: "Midterm Practical - Splunk Investigation"
+            },
+            { 
+                week: 9, 
+                title: "Incident Response Fundamentals", 
+                domain: "Incident Response and Management (3.1)", 
+                slo: "Summarize incident recovery and post-incident response",
+                classSession: "Incident response lifecycle (NIST framework), IR team roles and responsibilities, Communication and escalation procedures, Legal and regulatory considerations, Splunk's role in incident response workflows",
+                independentStudy: "Read: Chapter 9 - Incident Response Fundamentals, Study: SANS incident response methodology, Begin: Splunk Security Essentials app exploration, Case study: Major incident response analysis, Discussion: IR team coordination challenges",
+                labActivity: "Incident response playbook development, IR communication system setup, Splunk incident investigation workspace setup, Creating IR-focused Splunk searches and alerts, Evidence collection procedures practice"
+            },
+            { 
+                week: 10, 
+                title: "Incident Detection & Analysis", 
+                domain: "Incident Response and Management (3.2)", 
+                slo: "Distinguish threat data to determine impact",
+                classSession: "Incident detection mechanisms, Advanced Splunk correlation and analysis capabilities, Alert triage and validation using Splunk, Incident classification and severity assessment, Complex SPL for incident investigation",
+                independentStudy: "Read: Chapter 10 - Incident Detection and Analysis, Complete: Splunk Search Tutorial with sample data, Study: Splunk Common Information Model (CIM), Research: Advanced persistent threat (APT) analysis, Quiz: Detection and analysis concepts",
+                labActivity: "Advanced Splunk correlation search development, Incident timeline creation using Splunk, Multi-source data correlation for incident analysis, Creating dynamic incident response dashboards, Attack simulation and detection exercise",
+                milestone: "Advanced Correlation Search Development"
+            },
+            { 
+                week: 11, 
+                title: "Incident Containment & Eradication", 
+                domain: "Incident Response and Management (3.2)", 
+                slo: "Implement appropriate response and countermeasures",
+                classSession: "Containment strategies and techniques, Eradication methodologies, System isolation and quarantine, Malware removal procedures, Splunk alert actions and automated responses",
+                independentStudy: "Read: Chapter 11 - Containment and Eradication, Study: Network segmentation for containment, Study: Splunk Enterprise Security (ES) concepts, Case study: Ransomware response procedures, Assignment: Containment playbook development",
+                labActivity: "Network isolation simulation, Malware containment exercise, Automated Splunk alert actions configuration, Incident response workflow automation, System imaging and preservation"
+            },
+            { 
+                week: 12, 
+                title: "Recovery & Post-Incident Activities", 
+                domain: "Incident Response and Management (3.3)", 
+                slo: "Summarize incident recovery and post-incident response",
+                classSession: "Recovery planning and execution, System restoration procedures, Lessons learned process, Post-incident reporting requirements, Splunk reporting for post-incident analysis",
+                independentStudy: "Read: Chapter 12 - Recovery and Post-Incident, Complete: Recovery timeline development, Study: Advanced Splunk reporting and scheduling, Research: Business continuity integration, Discussion: Organizational learning from incidents",
+                labActivity: "System recovery simulation, Backup restoration procedures, Comprehensive incident analysis report in Splunk, Post-incident metrics and KPI dashboard creation, Improvement recommendation development"
+            },
+            { 
+                week: 13, 
+                title: "Reporting & Communication", 
+                domain: "Reporting and Communication (4.0)", 
+                slo: "All SLOs - documentation and communication",
+                classSession: "Technical report writing, Executive summary development, Stakeholder communication strategies, Metrics and KPI development, Advanced Splunk dashboard design principles",
+                independentStudy: "Read: Chapter 13 - Reporting and Communication, Complete: Report template development, Study: Splunk dashboard optimization techniques, Study: Data visualization best practices, Assignment: Executive briefing preparation",
+                labActivity: "Advanced Splunk dashboard creation with drilldowns, Executive-level security metrics dashboards, Scheduled report automation in Splunk, Custom visualization development, Presentation material development",
+                milestone: "Executive Dashboard Presentation"
+            },
+            { 
+                week: 14, 
+                title: "Advanced Threats & Emerging Technologies", 
+                domain: "Integration of all domains", 
+                slo: "Apply advanced reconnaissance and response techniques",
+                classSession: "Advanced persistent threats (APTs), Cloud security considerations, IoT and mobile device security, Artificial intelligence in cybersecurity, Splunk for cloud and hybrid environment monitoring",
+                independentStudy: "Read: Current threat intelligence reports, Research: Emerging attack vectors, Explore: Splunk Cloud and hybrid deployment options, Case study: Advanced threat campaign analysis, Discussion: Future of cybersecurity analytics",
+                labActivity: "Advanced threat simulation, Cloud security assessment, Splunk Machine Learning Toolkit exploration, Advanced threat hunting with Splunk, Threat landscape analysis project"
+            },
+            { 
+                week: 15, 
+                title: "Comprehensive Lab Exercise & Integration", 
+                domain: "Assessment Week - Practical Skills Demonstration", 
+                slo: "All SLOs - comprehensive practical application",
+                classSession: "Comprehensive scenario walkthrough, Team-based incident response exercise, Advanced Splunk troubleshooting and optimization, Peer presentations and feedback, Final project guidance",
+                independentStudy: "Final project completion, Portfolio organization and review, Splunk skills portfolio development, CySA+ exam preparation materials, Career planning and next steps",
+                labActivity: "End-to-end security operations simulation, Complete SOC analyst workflow using Splunk, Multi-domain skills integration, Final lab practical examination, Environment documentation and cleanup",
+                milestone: "Comprehensive SOC Analyst Simulation"
+            },
+            { 
+                week: 16, 
+                title: "Final Examination & Course Wrap-up", 
+                domain: "Assessment and Certification Preparation", 
+                slo: "All SLOs - final assessment and certification prep",
+                classSession: "Final examination (comprehensive), CySA+ certification exam preparation, Splunk certification pathway discussion, Course evaluation and feedback, Professional development planning",
+                independentStudy: "Final exam preparation and review, CySA+ practice exam completion, Splunk skills assessment and review, Course reflection and self-assessment, Professional portfolio finalization",
+                labActivity: "Capstone project presentation, Advanced Splunk use case demonstration, Peer evaluation and feedback, Lab environment final assessment, Certification study group organization"
+            }
+        ];
+
+        // --- DOM Manipulation and Event Handling ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const weeklyScheduleContainer = document.getElementById('weekly-schedule');
+
+            // Function to create and return an HTML element for a week's content
+            function createWeekItem(weekData) {
+                const itemWrapper = document.createElement('div');
+                itemWrapper.className = 'modern-card overflow-hidden transition-all duration-300';
+
+                const buttonId = `accordion-button-week-${weekData.week}`;
+                const contentId = `accordion-content-week-${weekData.week}`;
+
+                let milestoneHTML = '';
+                if (weekData.milestone) {
+                    milestoneHTML = `<span class="badge badge-gold ml-3">${weekData.milestone}</span>`;
+                }
+
+                itemWrapper.innerHTML = `
+                    <button 
+                        id="${buttonId}"
+                        class="accordion-button w-full flex items-center text-left p-6 bg-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500 rounded-t-2xl transition-all duration-300 hover:bg-gray-50"
+                        aria-expanded="false"
+                        aria-controls="${contentId}"
+                    >
+                        <div class="week-number">${weekData.week}</div>
+                        <div class="flex-grow">
+                            <div class="flex items-center flex-wrap mb-2">
+                                <h3 class="text-xl font-bold school-blue-text mr-3">${weekData.title}</h3>
+                                ${milestoneHTML}
+                            </div>
+                            <div class="font-mono text-sm text-purple-600 font-medium mb-1">${weekData.domain}</div>
+                            <div class="text-gray-600 text-sm">SLO: ${weekData.slo}</div>
+                        </div>
+                        <div class="accordion-icon text-2xl font-light school-blue-text transform transition-transform duration-300 ml-4">+</div>
+                    </button>
+                    <div 
+                        id="${contentId}"
+                        class="accordion-content"
+                        role="region"
+                        aria-labelledby="${buttonId}"
+                    >
+                        <div class="px-8 pb-8">
+                            <div class="mb-6">
+                                <div class="flex items-center mb-3">
+                                    <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                    </svg>
+                                    <h4 class="font-semibold text-gray-800">Class Session (80 minutes)</h4>
+                                </div>
+                                <p class="text-gray-600 leading-relaxed">${weekData.classSession}</p>
+                            </div>
+                            <div class="mb-6">
+                                <div class="flex items-center mb-3">
+                                    <svg class="w-5 h-5 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                    </svg>
+                                    <h4 class="font-semibold text-gray-800">Independent Study (4.5 hours)</h4>
+                                </div>
+                                <p class="text-gray-600 leading-relaxed">${weekData.independentStudy}</p>
+                            </div>
+                            <div>
+                                <div class="flex items-center mb-3">
+                                    <svg class="w-5 h-5 mr-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
+                                    </svg>
+                                    <h4 class="font-semibold text-gray-800">Lab Activity (3 hours)</h4>
+                                </div>
+                                <p class="text-gray-600 leading-relaxed">${weekData.labActivity}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                return itemWrapper;
+            }
+
+            // Populate the page with course data
+            courseData.forEach(week => {
+                const item = createWeekItem(week);
+                weeklyScheduleContainer.appendChild(item);
+            });
+
+            // Add click event listeners to all accordion buttons
+            document.querySelectorAll('.accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const isExpanded = button.getAttribute('aria-expanded') === 'true';
+                    
+                    button.classList.toggle('active');
+                    button.setAttribute('aria-expanded', !isExpanded);
+
+                    if (content.style.maxHeight) {
+                        content.style.maxHeight = null;
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                    }
+                });
+            });
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // PDF Download functionality
+            document.getElementById('download-pdf').addEventListener('click', () => {
+                const { jsPDF } = window.jspdf;
+                const syllabusContent = document.getElementById('syllabus-content');
+                const allAccordions = document.querySelectorAll('.accordion-content');
+                
+                // Show loading state
+                const downloadBtn = document.getElementById('download-pdf');
+                const originalText = downloadBtn.innerHTML;
+                downloadBtn.innerHTML = `
+                    <svg class="w-5 h-5 mr-2 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                    </svg>
+                    Generating PDF...
+                `;
+                downloadBtn.disabled = true;
+                
+                // Temporarily expand all accordions for full content capture
+                allAccordions.forEach(content => {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                });
+
+                // Use html2canvas to capture the content
+                html2canvas(syllabusContent, {
+                    scale: 1.5,
+                    useCORS: true,
+                    allowTaint: true,
+                    backgroundColor: '#ffffff'
+                }).then(canvas => {
+                    const imgData = canvas.toDataURL('image/png');
+                    const pdf = new jsPDF({
+                        orientation: 'portrait',
+                        unit: 'pt',
+                        format: 'a4'
+                    });
+                    
+                    const pdfWidth = pdf.internal.pageSize.getWidth();
+                    const pdfHeight = pdf.internal.pageSize.getHeight();
+                    const canvasWidth = canvas.width;
+                    const canvasHeight = canvas.height;
+                    const ratio = canvasHeight / canvasWidth;
+                    const imgHeight = pdfWidth * ratio;
+                    let heightLeft = imgHeight;
+                    let position = 0;
+
+                    pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, imgHeight);
+                    heightLeft -= pdfHeight;
+
+                    while (heightLeft > 0) {
+                        position = heightLeft - imgHeight;
+                        pdf.addPage();
+                        pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, imgHeight);
+                        heightLeft -= pdfHeight;
+                    }
+                    
+                    pdf.save('Network-Defense-Security-Course-Syllabus.pdf');
+
+                    // Restore button state
+                    downloadBtn.innerHTML = originalText;
+                    downloadBtn.disabled = false;
+
+                    // Collapse accordions back to their original state
+                    allAccordions.forEach(content => {
+                        const button = content.previousElementSibling;
+                        if (!button.classList.contains('active')) {
+                           content.style.maxHeight = null;
+                        }
+                    });
+                }).catch(error => {
+                    console.error('Error generating PDF:', error);
+                    // Restore button state on error
+                    downloadBtn.innerHTML = originalText;
+                    downloadBtn.disabled = false;
+                    alert('There was an error generating the PDF. Please try again.');
+                });
+            });
+
+            // Add keyboard navigation for accordions
+            document.querySelectorAll('.accordion-button').forEach(button => {
+                button.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        button.click();
+                    }
+                });
+            });
+
+            // Add focus management for better accessibility
+            document.addEventListener('focusin', (e) => {
+                if (e.target.classList.contains('accordion-button')) {
+                    e.target.style.outline = '2px solid var(--school-blue)';
+                    e.target.style.outlineOffset = '2px';
+                }
+            });
+
+            document.addEventListener('focusout', (e) => {
+                if (e.target.classList.contains('accordion-button')) {
+                    e.target.style.outline = 'none';
+                }
+            });
+
+            // Initialize page with first week expanded for better UX
+            const firstWeekButton = document.querySelector('#accordion-button-week-1');
+            if (firstWeekButton) {
+                firstWeekButton.click();
+            }
+
+            // Add smooth hover effects to cards
+            const cards = document.querySelectorAll('.modern-card, .info-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.transform = 'translateY(-2px)';
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'translateY(0)';
+                });
+            });
+
+            // Add progress indicator for course completion
+            const totalWeeks = courseData.length;
+            const progressIndicator = document.createElement('div');
+            progressIndicator.className = 'fixed bottom-4 right-4 bg-white rounded-full shadow-lg p-3 border border-gray-200 no-print';
+            progressIndicator.innerHTML = `
+                <div class="flex items-center space-x-2">
+                    <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                    </svg>
+                    <span class="text-sm font-medium text-gray-700">${totalWeeks} Weeks</span>
+                </div>
+            `;
+            document.body.appendChild(progressIndicator);
+
+            // Add scroll-to-top functionality
+            const scrollToTopButton = document.createElement('button');
+            scrollToTopButton.className = 'fixed bottom-4 left-4 bg-blue-600 text-white rounded-full p-3 shadow-lg opacity-0 transition-opacity duration-300 no-print';
+            scrollToTopButton.innerHTML = `
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                </svg>
+            `;
+            scrollToTopButton.setAttribute('aria-label', 'Scroll to top');
+            
+            scrollToTopButton.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            document.body.appendChild(scrollToTopButton);
+
+            // Show/hide scroll-to-top button based on scroll position
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    scrollToTopButton.style.opacity = '1';
+                } else {
+                    scrollToTopButton.style.opacity = '0';
+                }
+            });
+
+            // Add course completion celebration animation
+            let expandedWeeks = 0;
+            document.querySelectorAll('.accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const isExpanding = button.getAttribute('aria-expanded') === 'false';
+                    if (isExpanding) {
+                        expandedWeeks++;
+                        if (expandedWeeks === totalWeeks) {
+                            // All weeks expanded - show completion message
+                            setTimeout(() => {
+                                const celebration = document.createElement('div');
+                                celebration.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 no-print';
+                                celebration.innerHTML = `
+                                    <div class="bg-white rounded-lg p-8 max-w-md mx-4 text-center animate-pulse">
+                                        <div class="text-6xl mb-4">🎉</div>
+                                        <h3 class="text-xl font-bold text-gray-800 mb-2">Course Overview Complete!</h3>
+                                        <p class="text-gray-600 mb-4">You've reviewed all 16 weeks of the Network Defense & Security curriculum.</p>
+                                        <button class="modern-btn" onclick="this.parentElement.parentElement.remove()">Continue</button>
+                                    </div>
+                                `;
+                                document.body.appendChild(celebration);
+                            }, 1000);
+                        }
+                    } else {
+                        expandedWeeks--;
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
